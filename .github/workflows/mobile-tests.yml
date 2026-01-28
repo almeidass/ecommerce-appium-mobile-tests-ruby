@@ -26,7 +26,6 @@ jobs:
         run: |
           bundle install
 
-      # Opção A (mais simples): você deixa o emulador e o appium já rodando manualmente.
       - name: Run Cucumber
         env:
           DEFAULT_TIMEOUT: "15"
