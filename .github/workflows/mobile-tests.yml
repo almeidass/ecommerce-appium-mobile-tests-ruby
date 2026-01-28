@@ -1,33 +1,45 @@
-name: Mobile Tests (Self-hosted)
+name: Ruby Cucumber (Cloud)
 
 on:
   workflow_dispatch:
+    inputs:
+      appium_server_url:
+        description: "Appium Server URL (ex: http://192.168.0.10:4723)"
+        required: true
+        default: "http://localhost:4723"
+
+      cucumber_tags:
+        description: "Cucumber tags (ex: @smoke, @critical)"
+        required: false
+        default: "@smoke"
+
+      default_timeout:
+        description: "Default timeout (seconds)"
+        required: false
+        default: "15"
+
   push:
-    branches: [ "main", "develop" ]
-  pull_request:
+    branches: ["main"]
 
 jobs:
-  android_appium_cucumber:
-    runs-on: self-hosted
+  cucumber:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Show environment info
-        run: |
-          ruby -v
-          bundle -v
-          node -v || true
-          appium -v || true
-          adb version || true
-
-      - name: Install gems
-        run: |
-          bundle install
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true
 
       - name: Run Cucumber
         env:
-          DEFAULT_TIMEOUT: "15"
+          APPIUM_SERVER_URL: ${{ inputs.appium_server_url }}
+          DEFAULT_TIMEOUT: ${{ inputs.default_timeout }}
         run: |
-          bundle exec cucumber --tags @smoke
+          echo "Running with Appium: $APPIUM_SERVER_URL"
+          echo "Running with timeout: $DEFAULT_TIMEOUT"
+          bundle exec cucumber --tags "${{ inputs.cucumber_tags }}" --publish

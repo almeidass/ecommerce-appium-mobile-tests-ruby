@@ -1,5 +1,5 @@
-@smoke
 Feature: Smoke - App startup
 
+    @regression @smoke
     Scenario: Open the app and reach the home screen
         Given the user is on the home screen

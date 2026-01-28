@@ -3,6 +3,6 @@ source 'https://rubygems.org'
 source 'https://rubygems.org'
 
 gem 'allure-cucumber'
-gem 'appium_lib', '~> 13.0'
-gem 'cucumber', '~> 9.0'
+gem 'appium_lib'
+gem 'cucumber', '~> 9.2', '>= 9.2.1'
 gem 'rspec-expectations'

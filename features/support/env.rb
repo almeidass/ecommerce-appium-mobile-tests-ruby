@@ -13,15 +13,15 @@ APPIUM_CAPS = {
 }.freeze
 
 APPIUM_LIB_OPTS = {
-  server_url: 'http://localhost:4723'
+  server_url: ENV.fetch('APPIUM_SERVER_URL', 'http://localhost:4723')
 }.freeze
 
-@driver = Appium::Driver.new(
+$driver = Appium::Driver.new(
   {
     caps: APPIUM_CAPS,
     appium_lib: APPIUM_LIB_OPTS
   },
-  true
+  false
 )
 
 Appium.promote_appium_methods Object

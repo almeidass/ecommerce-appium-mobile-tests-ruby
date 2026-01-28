@@ -1,0 +1,7 @@
+<% timestamp = Time.now.strftime("%Y%m%d_%H%M%S") %>
+
+default: -f pretty -x
+report: -p allure_report -p html_report
+allure_report: -f AllureCucumber::CucumberFormatter --out=logs
+html_report: -f html --out=<%=timestamp%>_report.html
+rerun: -f rerun --out rerun_<%=timestamp%>.txt

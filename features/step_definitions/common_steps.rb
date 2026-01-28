@@ -1,5 +1,5 @@
 Given('the application is launched') do
-  expect(@driver.session_id).not_to be_nil
+  expect($driver.session_id).not_to be_nil
 end
 
 Given('the user is on the home screen') do

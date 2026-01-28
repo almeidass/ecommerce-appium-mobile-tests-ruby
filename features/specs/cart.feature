@@ -1,6 +1,7 @@
 @critical
 Feature: Cart
 
+  @regression
   Scenario: Add product to cart
     Given the user is on the product list screen
     When the user opens the first product
