@@ -1,0 +1,33 @@
+name: Mobile Tests (Self-hosted)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+
+jobs:
+  android_appium_cucumber:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Show environment info
+        run: |
+          ruby -v
+          bundle -v
+          node -v || true
+          appium -v || true
+          adb version || true
+
+      - name: Install gems
+        run: |
+          bundle install
+
+      - name: Run Cucumber
+        env:
+          DEFAULT_TIMEOUT: "15"
+        run: |
+          bundle exec cucumber --tags @smoke
