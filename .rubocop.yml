@@ -1,0 +1,19 @@
+AllCops:
+  NewCops: enable
+#   Exclude:
+#     - "bin/**/*"
+#     - "vendor/**/*"
+#     - "db/**/*"
+#     - "config/**/*"
+#     - "script/**/*"
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+# Style/ClassVars:
+#   Enabled: false
+# Layout/CaseIndentation:
+#   Enabled: false
+# Layout/LineLength:
+#   Max: 150
